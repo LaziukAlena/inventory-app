@@ -14,17 +14,10 @@ import FieldFn from './Field.js';
 
 dotenv.config();
 
-export const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT || 5432,
-    dialect: 'postgres',
-    logging: false,
-  }
-);
+export const sequelize = new Sequelize(process.env.DATABASE_PUBLIC_URL, {
+  dialect: 'postgres',
+  logging: false,
+});
 
 
 export const User = UserFn(sequelize, DataTypes);
