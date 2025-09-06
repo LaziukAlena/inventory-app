@@ -12,7 +12,7 @@ const ItemTable = ({ inventoryId, user }) => {
   const [sortOrder, setSortOrder] = useState("desc");
   const [isSaving, setIsSaving] = useState(false);
 
-  // Загрузка элементов
+  
   const fetchItems = async () => {
     try {
       const res = await api.get(`/inventories/${inventoryId}/items`);
@@ -26,7 +26,7 @@ const ItemTable = ({ inventoryId, user }) => {
     fetchItems();
   }, [inventoryId]);
 
-  // Автосохранение каждые 7-10 секунд
+  
   useEffect(() => {
     const interval = setInterval(() => {
       saveChanges();
@@ -38,11 +38,11 @@ const ItemTable = ({ inventoryId, user }) => {
     if (isSaving) return;
     setIsSaving(true);
     try {
-      // отправляем все измененные элементы
+      
       const changedItems = items.filter(item => item._changed);
       if (changedItems.length > 0) {
         await api.put(`/inventories/${inventoryId}/items/bulk`, changedItems);
-        // После успешного сохранения сбрасываем _changed
+        
         setItems(prev =>
           prev.map(item => ({ ...item, _changed: false }))
         );
@@ -54,7 +54,7 @@ const ItemTable = ({ inventoryId, user }) => {
     }
   };
 
-  // Фильтрация и сортировка
+  
   const filteredItems = items
     .filter(item =>
       Object.values(item).some(val =>

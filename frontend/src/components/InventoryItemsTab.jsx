@@ -9,7 +9,7 @@ const InventoryItemsTab = ({ inventory, canEdit }) => {
   const [loading, setLoading] = useState(true);
   const timerRef = useRef(null);
 
-  // Получение всех элементов инвентаря
+  
   useEffect(() => {
     api.get(`/inventories/${inventory.id}/items`).then((res) => {
       setItems(res.data);
@@ -17,7 +17,7 @@ const InventoryItemsTab = ({ inventory, canEdit }) => {
     });
   }, [inventory.id]);
 
-  // Автосохранение каждые 7 секунд
+  
   useEffect(() => {
     if (!canEdit) return;
     timerRef.current = setInterval(() => {
@@ -28,13 +28,13 @@ const InventoryItemsTab = ({ inventory, canEdit }) => {
     return () => clearInterval(timerRef.current);
   }, [items, canEdit]);
 
-  // Добавление нового элемента
+ 
   const handleAddItem = async () => {
     const newItem = {
       inventory_id: inventory.id,
       name: "",
       custom_id: generateCustomID(),
-      // Поддержка до 3 пользовательских полей каждого типа
+     
       custom_string1: "",
       custom_string2: "",
       custom_string3: "",
@@ -62,13 +62,13 @@ const InventoryItemsTab = ({ inventory, canEdit }) => {
     }
   };
 
-  // Генерация пользовательского ID
+  
   const generateCustomID = () => {
     const random = Math.floor(100000 + Math.random() * 900000);
     return `INV-${inventory.id}-${random}`;
   };
 
-  // Обновление элемента (редактирование или автосохранение)
+  
   const handleUpdateItem = async (updatedItem) => {
     try {
       const res = await api.put(
@@ -92,7 +92,7 @@ const InventoryItemsTab = ({ inventory, canEdit }) => {
     }
   };
 
-  // Удаление элемента
+  
   const handleDeleteItem = async (id) => {
     if (!window.confirm("Удалить этот элемент?")) return;
     try {

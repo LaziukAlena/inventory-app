@@ -8,7 +8,7 @@ const LikeButton = ({ inventoryId, itemId = null }) => {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  // Функция для получения лайков
+
   const fetchLikes = async () => {
     try {
       const resCount = await axios.get("/api/likes/count", {
@@ -28,12 +28,12 @@ const LikeButton = ({ inventoryId, itemId = null }) => {
     }
   };
 
-  // Первоначальная загрузка
+  
   useEffect(() => {
     fetchLikes();
   }, [inventoryId, itemId, user]);
 
-  // Polling каждые 3 секунды
+ 
   useEffect(() => {
     const interval = setInterval(fetchLikes, 3000);
     return () => clearInterval(interval);
@@ -45,7 +45,7 @@ const LikeButton = ({ inventoryId, itemId = null }) => {
 
     try {
       if (liked) {
-        // Убираем лайк
+       
         await axios.delete("/api/likes", {
           data: { inventoryId, itemId },
           headers: { Authorization: `Bearer ${user.token}` },
@@ -53,7 +53,7 @@ const LikeButton = ({ inventoryId, itemId = null }) => {
         setLiked(false);
         setCount((prev) => prev - 1);
       } else {
-        // Ставим лайк
+        
         await axios.post(
           "/api/likes",
           { inventoryId, itemId },

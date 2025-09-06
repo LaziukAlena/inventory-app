@@ -6,15 +6,15 @@ const OAuthRedirect = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Получаем токен из URL
+    
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
 
     if (token) {
-      setAuthToken(token); // сохраняем токен в localStorage
-      navigate('/'); // редирект на главную
+      setAuthToken(token);
+      navigate('/');
     } else {
-      navigate('/login'); // если токена нет, на страницу логина
+      navigate('/login'); 
     }
   }, [navigate]);
 

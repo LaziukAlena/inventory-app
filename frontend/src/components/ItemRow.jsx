@@ -1,4 +1,4 @@
-// frontend/src/components/ItemRow.jsx
+
 import React, { useState, useEffect } from "react";
 import { api } from "../api";
 
@@ -6,7 +6,7 @@ const ItemRow = ({ item, currentUser, setItems }) => {
   const [editableItem, setEditableItem] = useState({ ...item });
   const [liked, setLiked] = useState(false);
 
-  // Проверка, можно ли редактировать
+
   const canEdit =
     currentUser &&
     (currentUser.id === item.created_by || item.canWrite);
@@ -18,7 +18,7 @@ const ItemRow = ({ item, currentUser, setItems }) => {
   const handleChange = (field, value) => {
     setEditableItem(prev => {
       const updated = { ...prev, [field]: value, _changed: true };
-      // Обновляем родительский state (ItemTable)
+      
       setItems(prevItems =>
         prevItems.map(it => (it.id === item.id ? updated : it))
       );
@@ -28,7 +28,7 @@ const ItemRow = ({ item, currentUser, setItems }) => {
 
   const toggleLike = async () => {
     if (!currentUser) return;
-    if (liked) return; // только один лайк
+    if (liked) return; 
 
     try {
       await api.post(`/items/${item.id}/like`);

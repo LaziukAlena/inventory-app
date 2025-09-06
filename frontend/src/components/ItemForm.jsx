@@ -14,13 +14,13 @@ const ItemForm = ({ inventoryId, fields, refresh }) => {
     try {
       await api.post(`/inventories/${inventoryId}/items`, formData);
       setFormData({});
-      refresh(); // обновляем список товаров
+      refresh(); 
     } catch (err) {
       setError(err.response?.data?.error || "Ошибка при добавлении товара");
     }
   };
 
-  // отрисовка input по типу поля
+  
   const renderFieldInput = (field) => {
     const value = formData[field.name] || "";
     switch (field.type) {
