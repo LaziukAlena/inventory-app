@@ -23,6 +23,7 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,
   "https://inventory-app-eight-pink.vercel.app",
   "https://inventory-cfmrnttst-alena-laziuks-projects.vercel.app",
+  "https://inventory-b8rmbgon5-alena-laziuks-projects.vercel.app",
 ];
 
 app.use(
